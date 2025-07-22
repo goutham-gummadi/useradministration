@@ -1,5 +1,5 @@
-﻿$Groups= @("ASG_LC_DM_DataBricks_PRD_DataWarehouse_r","ASG_LC_DM_DataBricks_PRD_DataWarehouse_rm")
-$Owner="6ef88a96-d57e-4ae6-a8ab-7168ae01158b"
+﻿$Groups= @("")
+$Owner=""
 foreach($group in $Groups){
     if($group -like "PRD"){
         $Env="PRD"
