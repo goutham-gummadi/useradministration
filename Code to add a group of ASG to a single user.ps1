@@ -1,6 +1,6 @@
-﻿$Groups = @("Gong_sso")
+﻿$Groups = @("")
 
-$User = "sarah.voss@edhc.com"
+$User = ""
 
 # Retrieve user information
 $Userinfo = az ad user show --id $User --output json | ConvertFrom-Json
