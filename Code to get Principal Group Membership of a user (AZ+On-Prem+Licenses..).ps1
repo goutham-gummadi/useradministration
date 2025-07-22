@@ -35,7 +35,7 @@ $UserPrincipalName = Read-Host "Enter the UPN of user to get Principal Group Mem
 
 # Get detailed user information
 $UserAZInfo = Get-EntraUser -UserId $UserPrincipalName
-$UserSAM = $UserPrincipalName -replace "@edhc.com", ""
+$UserSAM = $UserPrincipalName -replace "", ""
 Write-Host "$UserSAM" -ForegroundColor Cyan
 # Check if the user exists before proceeding
 if ($UserAZInfo) {
