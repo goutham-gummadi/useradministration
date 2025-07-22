@@ -1,5 +1,5 @@
 ﻿
-$importfile = "C:\Users\ext.goutham.gummadi\OneDrive - Lantern\Desktop\Rough book\roughbook.xlsx"
+$importfile = ""
 $importdata = Import-Excel -Path $importfile
 
 foreach ($User in $importdata) {
@@ -17,7 +17,7 @@ foreach ($User in $importdata) {
             continue
         }
 
-        $Groups = @("asg_lc_eng_github_sso_user","asg_lc_ct_datadog_SSO")
+        $Groups = @("")
 
     foreach ($group in $Groups) {
         try {
