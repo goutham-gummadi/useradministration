@@ -3,7 +3,7 @@
   }
   #>
   # Get groups that start with 'asg_dm_snowflake'
-$groups = Get-MgGroup -Filter "startswith(displayName,'asg_dm_snowflake')" -Property Id, DisplayName
+$groups = Get-MgGroup -Filter "startswith(displayName,'')" -Property Id, DisplayName
 
 # Loop over each group and add the new owner
 <#foreach ($group in $groups) {
