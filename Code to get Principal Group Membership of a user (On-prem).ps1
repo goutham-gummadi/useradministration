@@ -11,6 +11,6 @@ $user.MemberOf | ForEach-Object {
     Get-ADGroup -Identity $_ | Select-Object Name
 }
 
-& "C:\Users\ext.goutham.gummadi\OneDrive - Lantern\Desktop\User_Administration_PS\Development\Get user account status.ps1" -userdata $userSAM
+& "" -userdata $userSAM
 
 Write-Host "Script Completed" -ForegroundColor Red
