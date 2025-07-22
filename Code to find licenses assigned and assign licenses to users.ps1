@@ -2,7 +2,7 @@
 Connect-MgGraph -Scopes "User.Read.All"
 
 # Import Excel data (requires ImportExcel module)
-$csvfile = "C:\Users\ext.goutham.gummadi\OneDrive - Lantern\Desktop\Rough book\roughbook.xlsx"
+$csvfile = ""
 $csvdata = Import-Excel -Path $csvfile
 
 foreach ($user in $csvdata) {
@@ -18,7 +18,7 @@ foreach ($user in $csvdata) {
 
     foreach ($matchedUser in $matchedUsers) {
         Write-Host "`nUser: $($matchedUser.DisplayName) ($($matchedUser.UserPrincipalName))" -ForegroundColor Cyan
-        Set-MgUserLicense -UserId $matchedUsers.Id -AddLicenses @{SKUId="f8a1db68-be16-40ed-86d5-cb42ce701560"} -RemoveLicenses @() 
+        Set-MgUserLicense -UserId $matchedUsers.Id -AddLicenses @{SKUId=""} -RemoveLicenses @() 
         Start-Sleep -Seconds 10
         $licenses = Get-MgUserLicenseDetail -UserId $matchedUser.Id
 
