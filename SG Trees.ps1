@@ -39,4 +39,4 @@ foreach ($GroupSam in $AllGroupsInAD) {
 }
 
 # Output the tree dictionary
-$FinalTreeDict | ConvertTo-Json -Depth 10 | Out-File -FilePath "C:\Users\ext.goutham.gummadi\Downloads\GroupMembershipTree$CurrentDate.json"
+$FinalTreeDict | ConvertTo-Json -Depth 10 | Out-File -FilePath ""
