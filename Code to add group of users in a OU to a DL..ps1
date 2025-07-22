@@ -8,7 +8,7 @@ Write-Host "$($CurrentOUUser.DisplayName) is already a member of SG_ORG_ITS"
 }
 else
 {
-Add-ADGroupMember -Identity SG_ORG_ITS -Members $CurrentOUUser.SamAccountName
+Add-ADGroupMember -Identity "" -Members $CurrentOUUser.SamAccountName
 }
 }
 }
