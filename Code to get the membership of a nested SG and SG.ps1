@@ -30,7 +30,7 @@ Function Get-GroupTree {
 }
 
 # Retrieve groups that match the filter
-$RootGroups = Get-ADGroup -Filter {Name -like "SG_EDH_PRD_SQL_Analytics_r"} -Properties * | Select-Object -ExpandProperty Name
+$RootGroups = Get-ADGroup -Filter {Name -like ""} -Properties * | Select-Object -ExpandProperty Name
 
 # Iterate over each group and display its tree structure
 foreach ($GroupName in $RootGroups) {
