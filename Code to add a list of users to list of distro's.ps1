@@ -1,8 +1,8 @@
 ﻿# List of users to add (can be UPNs or email addresses)
-$users = @("elvis.basang@edhc.com")
+$users = @("")
 
 # List of distribution groups
-$distributionLists = @("it@lanterncare.com","info_security@lanterncare.com","drktrc_critialhigh@edhc.com","drktrc_alerts@lanterncare.com","alerts-seim@edhc.com","alerts-crowdstrike@lanterncare.com")
+$distributionLists = @("")
 
 # Loop through each DL and add each user
 foreach ($dl in $distributionLists) {
