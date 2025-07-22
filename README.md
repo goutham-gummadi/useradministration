@@ -1,7 +1,3 @@
-Here’s a polished `README.md` file you can use for your GitHub repository:
-
----
-
 # 🛠️ Daily Automation Scripts
 
 Welcome to the **Daily Automation Scripts** repository! This collection of scripts is designed to streamline and automate repetitive IT tasks, saving time and reducing manual effort. These tools are actively used in day-to-day operations and are continuously updated and improved.
