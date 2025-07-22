@@ -1,15 +1,15 @@
 ﻿$ConnectModules= Read-Host "Do you want to connect to modules"
 if($connectModules -ne "N")
     {
-        &"C:\Users\ext.goutham.gummadi\OneDrive - Lantern\Desktop\User_Administration_PS\Final Working Scripts\Connect to Modules.ps1"
+        &""
     }
 $CurrentDateTime= Get-Date -Format "mm-dd-yyy-hh-mm"
 $OnboardingUsersData= $null
 #Input CSV file
-$ImportFilePath= "C:\Users\ext.goutham.gummadi\Lantern\Technology - Onboarding Automation files\Bulk Active Directory.csv"
+$ImportFilePath= ""
 #Output Log File
-$LogFile="C:\Users\ext.goutham.gummadi\Lantern\Technology - Onboarding Automation files\User Log files\UserLogFile-$CurrentDateTime.txt"
-$ExchangeLogfile= "C:\Users\ext.goutham.gummadi\EDHC\Technology - Infrastructure\Onboarding Automation files\Exchange Logfile\ExchangeLogFile-$CurrentDateTime.txt"
+$LogFile=""
+$ExchangeLogfile= ""
 #Importing Input data
 $OnboardingUsersData= Import-Csv -Path $ImportFilePath
 Add-Content -Path $LogFile -Value "Starting Script $CurrentDateTime"
@@ -93,7 +93,7 @@ foreach($User in $OnboardingUsersData)
             Write-Host "$DisplayName Account Already exists"
             #If user is a rehire
             
-                Move-ADObject -Identity $UserAccountInfo.CanonicalName -TargetPath "OU=New Users,OU=People,DC=corp,DC=edhc,DC=com" -ErrorAction SilentlyContinue
+                Move-ADObject -Identity $UserAccountInfo.CanonicalName -TargetPath "" -ErrorAction SilentlyContinue
                 Set-aduser -Identity $UserAccountInfo.SamAccountName -Enabled:$true -ErrorAction SilentlyContinue
 
 
@@ -148,7 +148,7 @@ foreach($User in $OnboardingUsersData)
                         }
                     else
                         {
-                        $BaseGroups = @("SG_EmployeeVPNAccess", "SG_KnowBe4", "SG_File_BaseAccess", "SG_DocuSign_EDHC_CA")
+                        $BaseGroups = @("")
                         add-UserToBaseGroups -SamAccountName $UserAccountInfo.SamAccountName -BaseGroups $BaseGroups -LogFile $LogFile
                         }
             }
@@ -169,7 +169,7 @@ foreach($User in $OnboardingUsersData)
                         -SamAccountName $SamAccountName -UserPrincipalName $UserPrincipalName `
                         -AccountPassword (ConvertTo-SecureString $AccountPassword -AsPlainText -Force) -Enabled $true `
                         -Title $Title -Department $Department -Description $Description -EmailAddress $EmailAddress `
-                        -Path "OU=New Users,OU=People,DC=corp,DC=edhc,DC=com" -Manager $ManagerInfo.SamAccountName -Company $Company -ErrorAction Stop
+                        -Path "" -Manager $ManagerInfo.SamAccountName -Company $Company -ErrorAction Stop
                         Write-Host "$DisplayName account is made with Manager info"
                         Add-Content -Path $LogFile -Value "$DisplayName account is made with manager info"
                         }
@@ -190,7 +190,7 @@ foreach($User in $OnboardingUsersData)
                         -SamAccountName $SamAccountName -UserPrincipalName $UserPrincipalName `
                         -AccountPassword (ConvertTo-SecureString $AccountPassword -AsPlainText -Force) -Enabled $true `
                         -Title $Title -Department $Department -Description $Description -EmailAddress $EmailAddress `
-                        -Path "OU=New Users,OU=People,DC=corp,DC=edhc,DC=com" -Company $Company -ErrorAction Stop
+                        -Path "" -Company $Company -ErrorAction Stop
                         Write-Host "$DisplayName account is made without Manager info"
                         Add-Content -Path $LogFile -Value "$DisplayName account is made without manager info"
                         }
@@ -231,12 +231,12 @@ foreach($User in $OnboardingUsersData)
 
                     #Assigning groups to user
                     $UserTitlePostAccountCreation= $UserAccountInfoPostCreation.Title
-                    if($UserTitlePostAccountCreation -eq "Care Advocate")
+                    if($UserTitlePostAccountCreation -eq "")
                         {
                         try
                             {
                             #Getting RBAC memberships
-                            $TemplateInfo = Get-ADUser -Identity catemplate -Properties MemberOf
+                            $TemplateInfo = Get-ADUser -Identity  -Properties MemberOf
                             $RelavantGroups = $TemplateInfo.MemberOf | Get-ADGroup | Select-Object Name
                             # Get current user to be added to groups
                             $CAUsers = Get-ADUser -Identity $SamAccountName | Select-Object -ExpandProperty SamAccountName
@@ -263,7 +263,7 @@ foreach($User in $OnboardingUsersData)
                         }
                     else
                         {
-                        $BaseGroups = @("SG_EmployeeVPNAccess", "SG_KnowBe4", "SG_File_BaseAccess", "SG_DocuSign_EDHC_CA")
+                        $BaseGroups = @("")
                         add-UserToBaseGroups -SamAccountName $UserAccountInfoPostCreation.SamAccountName -BaseGroups $BaseGroups -LogFile $LogFile
                         }          
 
@@ -288,7 +288,7 @@ foreach($User in $OnboardingUsersData)
 Write-Host "Starting Exchange assignments"
 Get-Date
 #Start-Sleep -Seconds 1500
-#Start-Process -FilePath "C:\Users\ext.goutham.gummadi\OneDrive - Lantern\Desktop\User_Administration_PS\Final Working Scripts\Python Codes\timer.py"
+#Start-Process -FilePath ""
 
 foreach ($User in $OnboardingUsersData) 
     {
@@ -317,7 +317,7 @@ foreach ($User in $OnboardingUsersData)
                 Write-Host "Unable to update Usage Location for user $($AzureUserInfo.displayName)" -ForegroundColor Red
                 }
             
-            $SKUID= "05e9a617-0261-4cee-bb44-138d3ef5d965"
+            $SKUID= ""
             try{
                 Set-MgUserLicense -UserId $AzureUserInfo.Id -AddLicenses @{SKUId=$SKUID} -RemoveLicenses @() 
                 }
@@ -328,7 +328,7 @@ foreach ($User in $OnboardingUsersData)
             Write-Host ""
             Write-Host ""
             # Add the user to each distribution list
-            $DistributionList = @("all@edhc.com")
+            $DistributionList = @("")
             foreach ($dl in $DistributionList) 
                 {
                 Add-DistributionGroupMember -Identity $dl -Member $UserEmailAddress -ErrorAction SilentlyContinue
@@ -336,7 +336,7 @@ foreach ($User in $OnboardingUsersData)
                 Add-Content -Path $LogFile -Value "Added $($TargetUser.SamAccountName) to $dl"
                 }
             Start-Sleep -Seconds 10
-            $MailEnabledSecurityGroup = @("defend_users@edhc.com")
+            $MailEnabledSecurityGroup = @("")
             foreach ($SG in $MailEnabledSecurityGroup) 
                 {
                 Add-DistributionGroupMember -Identity $SG -Member $UserEmailAddress -ErrorAction SilentlyContinue
@@ -352,7 +352,7 @@ foreach ($User in $OnboardingUsersData)
                     }
 
                     # Get the group ID for 'TheBrightSides@lanterncare.com'
-                    $Brightside = (Get-MgGroup -Filter "mail eq 'TheBrightSides@lanterncare.com'" -Property Id).Id
+                    $Brightside = (Get-MgGroup -Filter "mail eq ''" -Property Id).Id
 
                     # Add the user to the group
                     New-MgGroupMemberByRef -GroupId $Brightside -BodyParameter $OdataID
