@@ -1,6 +1,6 @@
-﻿$csvpath= "C:\Users\ext.goutham.gummadi\Downloads\Move to 120.csv"
+﻿$csvpath= ""
 $csvdata= Import-Csv -Path $csvpath
-$targetpath= "OU=Offline 120\+,OU=Offboarded Users (No Sync),DC=corp,DC=edhc,DC=com"
+$targetpath= ""
 
 foreach($device in $csvdata){
 $devicename= $device.DeviceName
