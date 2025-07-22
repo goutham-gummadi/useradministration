@@ -7,7 +7,7 @@ $DeviceName = "EDHC" + $CurrentDeviceSerialNumber + "$"
 # Add device to domain
 try {
     Write-Host "Joining device to domain..." -ForegroundColor Cyan
-    Add-Computer -DomainName "corp.edhc.com" `
+    Add-Computer -DomainName "" `
                  -NewName $DeviceName `
                  -OUPath "OU=EndUserComputers,DC=corp,DC=edhc,DC=com" `
                  -Credential (Get-Credential) `
