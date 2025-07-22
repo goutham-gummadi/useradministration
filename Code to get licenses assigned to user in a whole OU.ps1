@@ -1,5 +1,5 @@
 ﻿# Get users from the specific OU
-$userinfo = Get-ADUser -Filter * -SearchBase "OU=Service accounts,OU=Service Admins,DC=corp,DC=edhc,DC=com" -SearchScope Subtree -Properties SamAccountName, UserPrincipalName
+$userinfo = Get-ADUser -Filter * -SearchBase "" -SearchScope Subtree -Properties SamAccountName, UserPrincipalName
 
 # Loop through each user
 $userinfo | ForEach-Object {
