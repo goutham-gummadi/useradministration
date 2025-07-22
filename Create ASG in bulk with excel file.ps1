@@ -1,5 +1,5 @@
 ﻿Connect-AzAccount
-$filepath = "C:\Users\ext.goutham.gummadi\Lantern\Technology - Onboarding Automation files\Create bulk ASG.xlsx"
+$filepath = ""
 $Fileinfo = Import-Excel -Path $filepath
 
 # Optional: Log file setup
